@@ -6,7 +6,7 @@ class Inductor(CircuitElement):
         super().__init__(n1, n2, inductance)
         self.r_ser = r_ser  # 直列抵抗（Ω）
 
-    def stamp(self, G, C, B=None, E=None, k=None, x_prev=None):
+    def stamp(self, G, C, B=None, E=None, k=None, x_prev=None, t=None):
         """
         B に枝接続を書き込み、さらに直列抵抗 Rser を G にスタンプする。
         返り値として L を返す（Circuit.build_matrices が収集する）

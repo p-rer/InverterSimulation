@@ -1,5 +1,4 @@
 import numpy as np
-from CircuitElement.VoltageSource import VoltageSource
 
 class Simulator:
     def __init__(self, circuit, dt):
@@ -27,7 +26,7 @@ class Simulator:
             # 電圧源ベクトル E
             E = np.zeros((m, 1))
             for i, elem in enumerate(branch_elems):
-                E[i, 0] = elem.voltage_func(t) if isinstance(elem, VoltageSource) else 0.0
+                E[i, 0] = elem.time_func(t) if callable(elem.time_func) else 0.0
 
             # NR反復
             x_old = x.copy()
@@ -39,7 +38,7 @@ class Simulator:
 
                 # 各素子スタンプ
                 for elem in self.circuit.elements:
-                    Ieq = elem.stamp(G, C, B, E, None, x_prev=x_old)
+                    Ieq = elem.stamp(G, C, B, E, None, x_prev=x_old, t=t)
                     if np.isscalar(Ieq):
                         continue
                     n1, n2 = elem.n1, elem.n2

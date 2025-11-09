@@ -8,7 +8,7 @@ class Diode(CircuitElement):
         self.n = n
         self.Vt = Vt
 
-    def stamp(self, G, C, B=None, E=None, k=None, x_prev=None):
+    def stamp(self, G, C, B=None, E=None, k=None, x_prev=None, t=None):
         """
         線形素子と同一シグネチャ。非線形でも対応できるようx_prevを追加。
         他は無視してOK。
